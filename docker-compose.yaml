@@ -46,6 +46,7 @@ services:
 
 volumes:
   mongo-data:
+  redis-data:
 
 networks:
   mongo-net:

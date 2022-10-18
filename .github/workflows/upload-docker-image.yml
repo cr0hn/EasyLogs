@@ -28,4 +28,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
             push: true
-            tags: ${{ secrets.docker_username }}/easy_logs:${{ github.sha }},${{ secrets.docker_username }}/easy_logs:latest
+            tags: ${{ secrets.docker_username }}/easylogs:${{ github.sha }},${{ secrets.docker_username }}/easy_logs:latest
