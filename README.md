@@ -197,26 +197,26 @@ except Exception as e:
 
 - [Log4j HTTP Appender](https://logging.apache.org/log4j/2.x/manual/appenders.html#HttpAppender)
 
-> Collaboration is welcome! If you want to implement a new log source, please, open an issue.
+> [[Contributions are welcome](#contributing)](#contributing)! If you want to implement a new log source, please, open an issue.
 
 ## Go (NOT IMPLEMENTED)
 
 - [Go HTTP Handler log](https://golang.org/pkg/log/#Handler)
 
-> Collaboration is welcome! If you want to implement a new log source, please, open an issue.
+> [Contributions are welcome](#contributing)! If you want to implement a new log source, please, open an issue.
 
 ## NodeJS (NOT IMPLEMENTED)
 
-> Collaboration is welcome! If you want to implement a new log source, please, open an issue.
+> [Contributions are welcome](#contributing)! If you want to implement a new log source, please, open an issue.
 
 
 ## C# (NOT IMPLEMENTED)
 
-> Collaboration is welcome! If you want to implement a new log source, please, open an issue.
+> [Contributions are welcome](#contributing)! If you want to implement a new log source, please, open an issue.
 
 ## Ruby (NOT IMPLEMENTED)
 
-> Collaboration is welcome! If you want to implement a new log source, please, open an issue.
+> [Contributions are welcome](#contributing)! If you want to implement a new log source, please, open an issue.
 
 # Contributing
 
