@@ -197,7 +197,7 @@ except Exception as e:
 
 - [Log4j HTTP Appender](https://logging.apache.org/log4j/2.x/manual/appenders.html#HttpAppender)
 
-> [[Contributions are welcome](#contributing)](#contributing)! If you want to implement a new log source, please, open an issue.
+> [Contributions are welcome](#contributing)! If you want to implement a new log source, please, open an issue.
 
 ## Go (NOT IMPLEMENTED)
 
