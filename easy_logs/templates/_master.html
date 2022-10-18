@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="EasyLog Dashboard">
+    <meta name="author" content="Daniel García (cr0hn)">
+    <meta name="keyword" content="EasyLog Dashboard">
+
+    <title>EasyLogs</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github.min.css" integrity="sha512-0aPQyyeZrWj9sCA46UlmWgKOP0mUipLQ6OZXu8l4IcAmD2u31EPEy9VcIMvl7SoAaKe8bLXZhYoMaE/in+gcgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/css/sb-admin-2.min.css" integrity="sha512-Mk4n0eeNdGiUHlWvZRybiowkcu+Fo2t4XwsJyyDghASMeFGH6yUXcdDI3CKq12an5J8fq4EFzRVRdbjerO3RmQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="{{ url_for('static', filename="css/custom.css") }}" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename="img/favicons/apple-icon-57x57.png") }}" >
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename="img/favicons/apple-icon-60x60.png") }}" >
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename="img/favicons/apple-icon-72x72.png") }}" >
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename="img/favicons/apple-icon-76x76.png") }}" >
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename="img/favicons/apple-icon-114x114.png") }}" >
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename="img/favicons/apple-icon-120x120.png") }}" >
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename="img/favicons/apple-icon-144x144.png") }}" >
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename="img/favicons/apple-icon-152x152.png") }}" >
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename="img/favicons/apple-icon-180x180.png") }}" >
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename="img/favicons/android-icon-192x192.png") }}" >
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename="img/favicons/favicon-32x32.png") }}" >
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename="img/favicons/favicon-96x96.png") }}" >
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename="img/favicons/favicon-16x16.png") }}" >
+    <link rel="manifest" href="{{ url_for('static', filename="img/favicons/manifest.json") }}" >
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename="img/favicons/ms-icon-144x144.png") }}" >
+    <meta name="theme-color" content="#ffffff">
+
+    {% block css %}{% endblock %}
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        {% block main_content %}{% endblock %}
+        <!-- End of Main Content -->
+
+        {% include "includes/footer.html" %}
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="{{ url_for('static', filename="login.html") }}">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js" integrity="sha512-BNc7saQYlxCL10lykUYhFBcnzdKMnjx5fp5s5wPucDyZ7rKNwCoqJh1GwEAIhuePEK4WM9askJBRsu7ma0Rzvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js" integrity="sha512-mULnawDVcCnsk9a4aG1QLZZ6rcce/jSzEGqUkeOLy0b6q0+T6syHrxlsAGH7ZVoqC93Pd0lBqd6WguPWih7VHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/js/sb-admin-2.min.js" integrity="sha512-+QnjQxxaOpoJ+AAeNgvVatHiUWEDbvHja9l46BHhmzvP0blLTXC4LsvwDVeNhGgqqGQYBQLFhdKFyjzPX6HGmw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Syntax highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js" integrity="sha512-BNc7saQYlxCL10lykUYhFBcnzdKMnjx5fp5s5wPucDyZ7rKNwCoqJh1GwEAIhuePEK4WM9askJBRsu7ma0Rzvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/languages/json.min.js" integrity="sha512-CYNXYs/v5lf987Bm4mWE+5ZnOdxNoKqBrro4AtHg012BQDFj7b1V3YQyAPhYF/jGcxqkPpudoe8dCkkdmAH+cQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+
+{% block javascript %}{% endblock %}
+</body>
+
+</html>

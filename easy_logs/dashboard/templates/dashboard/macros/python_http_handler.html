@@ -1,0 +1,5 @@
+{% macro python_http_handler(data) %}
+    <div class="col-lg-1 col-3 text-xsm text-center font-weight-bold {{ data['levelname'] | log_level_color }} text-uppercase border-right-log" style="border-right: 1px solid #0d5aa7">{{ data['levelname'] }}</div>
+    <div class="col-lg-2 col-3 text-xsm text-center border-right-log">{{ data['name'] }}</div>
+    <div class="col-lg-9 col-6 text-xsm">{{ data['msg'] }}</div>
+{% endmacro %}

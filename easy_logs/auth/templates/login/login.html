@@ -1,0 +1,62 @@
+{% extends '_master.html' %}
+{% block title %}Inicia sesión{% endblock %}
+
+{% block main_content %}
+    <body class="bg-easylogs-primary">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container-xl px-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <!-- Basic auth form-->
+                            {{ method }}
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="text-center">
+                                    <img class="text-center mt-4" width="150" src="{{ url_for('static', filename='img/logo-250x250.jpg') }}" alt="EasyLogs Logo">
+                                </div>
+                                <div class="card-body">
+                                    <!-- Login form-->
+                                    <form method="post" action="{{ url_for('bp_auth.login') }}">
+                                        {{ form.csrf_token }}
+
+                                        <!-- Form Group (email address)-->
+                                        <div class="mb-3">
+                                            <label class="small mb-1" for="inputEmailAddress">User name</label>
+                                            {{ form.name(class="form-control", id="inputEmailAddress") }}
+                                        </div>
+                                        <!-- Form Group (password)-->
+                                        <div class="mb-3">
+                                            <label class="small mb-1" for="inputPassword">User Password</label>
+                                            {{ form.password(class="form-control", id="inputPassword") }}
+                                        </div>
+
+                                        <!-- Form Group (auth box)-->
+                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                            <button class="btn btn-primary" href="dashboard-1.html">Login</button>
+                                        </div>
+                                        {% with messages = get_flashed_messages(with_categories=True) %}
+                                            {% if messages %}
+                                                <div class="mb-3 mt-4">
+                                                    {% for category, message in messages %}
+                                                        <p class="alert alert-danger">{{ message }}</p>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        {% endwith %}
+                                        {% if form.errors %}
+                                            {% for error, msg in form.errors.items() %}
+                                                <p class="alert alert-danger">{{ error }}: {{ msg }}</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    </body>
+{% endblock %}

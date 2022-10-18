@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+    <img width="50px" src="{{ url_for('static', filename="img/logo-250x250.jpg") }}"  alt="EasyLogs logo"/>
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Nav Item - User Information -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('bp_auth.logout') }}">
+                <span class="mr-2 text-gray-600 small">Log out&nbsp; <i class="fas fa-sign-out-alt"></i></span>
+            </a>
+        </li>
+
+    </ul>
+
+</nav>

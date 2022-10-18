@@ -1,0 +1,15 @@
+# Web
+Flask~=2.2.2
+flask-wtf
+Flask-login
+Flask-Session
+Flask-Pydantic
+
+redis
+pymongo[srv]~=4.2.0
+sanic_envconfig
+
+setuptools~=65.3.0
+WTForms~=3.0.1
+Werkzeug~=2.2.2
+pydantic~=1.10.2

@@ -1,0 +1,105 @@
+{% extends "_master_center_content.html" %}
+{% from "dashboard/macros/python_http_handler.html" import python_http_handler %}
+
+{% block center_content %}
+    <!-- Begin Page Content -->
+    <form id="searchForm" method="get" action="{{ url_for("bp_dashboard.home") }}">
+        <div class="container-fluid">
+
+            <div class="row card shadow-white mb-4">
+                <div class="card-body p-3">
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="logLevel">Log Level</label>
+                            {{ form.log_level(class="form-control form-select") }}
+                        </div>
+                        <div class="col">
+                            <label for="searchText">Find text</label>
+                            {{ form.search_text(class="form-control") }}
+                        </div>
+                    </div>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <span class="alert alert-danger">{{ message }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+            <!-- Content Row -->
+            <div class="row mb-1 card shadow-white mb-2" style="background: #a8e9c2;">
+                <div class="col-sm-12 m-2">
+                    <div class="row bb-1">
+                        <div class="col-lg-1 col-3 text-xsm text-center font-weight-bold text-uppercase border-right-log color-white">Log <p class="d-none d-sm-inline">Level</p></div>
+                        <div class="col-lg-2 col-3 text-xsm text-center font-weight-bold border-right-log color-white">LOGGER <span class="d-none d-sm-inline">NAME</span></div>
+                        <div class="col-lg-9 col-6 text-xsm font-weight-bold color-white"><span class="d-none d-sm-inline">LOG </span>MESSAGE</div>
+                    </div>
+                </div>
+            </div>
+            {% if logs | length == 0 %}
+                <div class="row mb-1 card shadow">
+                    <div class="col-sm-12 m-2">
+                        <div class="row bb-1">
+                            <div class="col-lg-12 col-12 text-xsm text-center border-right-log">No logs to display</div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% for log in logs %}
+                <div class="row mb-1 card shadow">
+                    <div class="col-sm-12 m-2">
+                        <div class="row bb-1">
+                            {% if log_source == "python-http-handler" %}
+                                {{ python_http_handler(log) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if logs | length != 0 %}
+                <div class="row mt-2">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="dataTables_info ml-4 mt-2 text-center" id="dataTable_info" role="status" aria-live="polite">Showing 1 to
+                            {{ logs_per_page }} of {{ logs_total_pages }} pages</div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                            <ul class="pagination justify-content-center">
+                                <li class="paginate_button page-item previous {% if logs_current_page == logs_previous_page %}disabled{% endif %}" id="dataTable_previous">
+                                    <a href="{{ add_page(url_for(request.endpoint, **request.args), logs_previous_page) }}" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><i class="fa fa-chevron-left"></i> Previous</a>
+                                </li>
+                                {% for page in range(1, logs_total_pages + 1) %}
+                                    <li class="paginate_button page-item {% if logs_current_page == page %}active{% endif %}">
+                                        <a href="{{ add_page(url_for(request.endpoint, **request.args), page) }}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">{{ page }}</a>
+                                    </li>
+                                    {#                            {% if page < (logs_page_step + 1) or page > logs_total_pages - logs_page_step %}#}
+                                    {#                                <li class="paginate_button page-item {% if logs_current_page == page %}active{% endif %}">#}
+                                    {#                                    <a href="{{ url_for('bp_dashboard.home', page=page) }}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">{{ page }}</a>#}
+                                    {#                                </li>#}
+                                    {#                            {% else %}#}
+                                    {#                                {% if page == logs_page_step + 1 %}#}
+                                    {#                                    <li class="paginate_button page-item">#}
+                                    {#                                        <span class="page-link disabled">...</span>#}
+                                    {#                                    </li>#}
+                                    {#                                {% endif %}#}
+                                    {#                            {% endif %}#}
+                                {% endfor %}
+                                <li class="paginate_button page-item next {% if logs_current_page == logs_next_page %}disabled{% endif %}" id="dataTable_next">
+                                    <a href="{{ add_page(url_for(request.endpoint, **request.args), logs_next_page) }}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next <i class="fa fa-chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </form>
+    <!-- /.container-fluid -->
+{% endblock %}
