@@ -19,6 +19,7 @@ In a nutshell ``EasyLogs`` is a simple, but powerful, dashboard to visualize log
   - [Docker (standalone)](#docker-standalone)
   - [Docker (external MongoDB & Redis)](#docker-external-mongodb--redis)
   - [Docker Compose](#docker-compose)
+- [Connecting to EasyLogs](#connecting-to-easylogs)
 - [How to log to EasyLogs?](#how-to-log-to-easylogs)
   - [Python](#python)
     - [Python HTTP Handler](#python-http-handler)
@@ -135,6 +136,15 @@ You can use the provided ``docker-compose.yaml`` file to run EasyLogs with an ex
 ```
 
 > NOTE: If you want to expose MongoDB & Redis ports, be sure you add the ``ports:`` section in the ``docker-compose.yaml`` file.
+
+# Connecting to EasyLogs
+
+Once you have EasyLogs running, you can connect to it using the default credentials (Unless you have changed them):
+
+- User: ``admin``
+- Password: ``adminadmin``
+
+Then you can connect to the dashboard using the URL: ``http://localhost:8080``
 
 # How to log to EasyLogs?
 
