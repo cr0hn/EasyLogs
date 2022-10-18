@@ -18,7 +18,7 @@ def home():
 
     form = SearchForm(request.args, meta={'csrf': False})
 
-    if form.validate_on_submit():
+    if form.validate():
 
         total, logs = get_python_handler_logs(
             filter_log_level=form.log_level.data,
