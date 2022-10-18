@@ -9,6 +9,7 @@ In a nutshell ``EasyLogs`` is a simple, but powerful, dashboard to visualize log
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 - [EasyLogs - The simple, agnostic and lightweight logging dashboard](#easylogs---the-simple-agnostic-and-lightweight-logging-dashboard)
+
 - [What is EasyLogs?](#what-is-easylogs)
   - [Why not...](#why-not)
   - [EasyLogs is for you if...](#easylogs-is-for-you-if)
@@ -26,10 +27,10 @@ In a nutshell ``EasyLogs`` is a simple, but powerful, dashboard to visualize log
   - [NodeJS (NOT IMPLEMENTED)](#nodejs-not-implemented)
   - [C# (NOT IMPLEMENTED)](#c-not-implemented)
   - [Ruby (NOT IMPLEMENTED)](#ruby-not-implemented)
-- [TODO](#todo)
 - [Contributing](#contributing)
   - [Adding new loggers](#adding-new-loggers)
   - [Adding new loggers + API](#adding-new-loggers--api)
+- [TODO](#todo)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
@@ -207,13 +208,6 @@ except Exception as e:
 
 > Collaboration is welcome! If you want to implement a new log source, please, open an issue.
 
-# TODO
-
-[ ] Improve pagination for long logs
-[ ] Add more text
-[ ] Add more languages
-[ ] Improve authentication system: add API key support, multi-user...
-
 # Contributing
 
 You can contribute to this project in many ways:
@@ -243,6 +237,13 @@ If you also know Python and want to add a new end-point to the API, please, foll
 
 1. Copy & paste the ``easy_logs/loggers/python`` package and rename it to the name of the language.
 2. Adapt the code to the new language following the same structure.
+
+# TODO
+
+- [ ] Improve pagination for long logs
+- [ ] Add more text
+- [ ] Add more languages
+- [ ] Improve authentication system: add API key support, multi-user...
 
 # License
 
