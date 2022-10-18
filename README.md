@@ -1,11 +1,39 @@
-********************************************************************************************
-EasyLogs - The simple, agnostic and lightweight logging dashboard
-********************************************************************************************
+# EasyLogs - The simple, agnostic and lightweight logging dashboard
 
 ![License](https://img.shields.io/badge/License-Apache2-SUCCESS)
+
 ![Logo](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/logo-250x250.jpg)
 
 In a nutshell ``EasyLogs`` is a simple, but powerful, dashboard to visualize logs.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+- [EasyLogs - The simple, agnostic and lightweight logging dashboard](#easylogs---the-simple-agnostic-and-lightweight-logging-dashboard)
+- [What is EasyLogs?](#what-is-easylogs)
+  - [Why not...](#why-not)
+  - [EasyLogs is for you if...](#easylogs-is-for-you-if)
+- [Some screenshots](#some-screenshots)
+- [Deployment](#deployment)
+  - [Configuration](#configuration)
+  - [Docker (standalone)](#docker-standalone)
+  - [Docker (external MongoDB & Redis)](#docker-external-mongodb--redis)
+  - [Docker Compose](#docker-compose)
+- [How to log to EasyLogs?](#how-to-log-to-easylogs)
+  - [Python](#python)
+    - [Python HTTP Handler](#python-http-handler)
+  - [Java (NOT IMPLEMENTED)](#java-not-implemented)
+  - [Go (NOT IMPLEMENTED)](#go-not-implemented)
+  - [NodeJS (NOT IMPLEMENTED)](#nodejs-not-implemented)
+  - [C# (NOT IMPLEMENTED)](#c-not-implemented)
+  - [Ruby (NOT IMPLEMENTED)](#ruby-not-implemented)
+- [TODO](#todo)
+- [Contributing](#contributing)
+  - [Adding new loggers](#adding-new-loggers)
+  - [Adding new loggers + API](#adding-new-loggers--api)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # What is EasyLogs?
 
