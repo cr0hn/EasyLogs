@@ -255,6 +255,8 @@ If you also know Python and want to add a new end-point to the API, please, foll
 - [ ] Add more text
 - [ ] Add more languages
 - [ ] Improve authentication system: add API key support, multi-user...
+- [ ] Add download logs button
+- [ ] Add filter by date
 
 # License
 
