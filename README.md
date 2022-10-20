@@ -22,7 +22,8 @@ In a nutshell ``EasyLogs`` is a simple, but powerful, dashboard to visualize log
 - [Connecting to EasyLogs](#connecting-to-easylogs)
 - [How to log to EasyLogs?](#how-to-log-to-easylogs)
   - [Python](#python)
-    - [Python HTTP Handler](#python-http-handler)
+    - [Python HTTP Handler (default implementation)](#python-http-handler-default-implementation)
+    - [Python HTTP Handler (fault-tolerant version)](#python-http-handler-fault-tolerant-version)
   - [Java (NOT IMPLEMENTED)](#java-not-implemented)
   - [Go (NOT IMPLEMENTED)](#go-not-implemented)
   - [NodeJS (NOT IMPLEMENTED)](#nodejs-not-implemented)
@@ -152,7 +153,7 @@ EasyLogs can be used with any log source.
 
 ## Python
 
-### Python HTTP Handler
+### Python HTTP Handler (default implementation)
 
 Python has a builtin [HTTP Handler log](https://docs.python.org/3/library/logging.handlers.html#logging.handlers.HTTPHandler) that can be used to send logs to EasyLogs:
 
@@ -164,24 +165,30 @@ This file configures a logger and sent the log to a remote HTTP server.
 import logging
 import logging.handlers
 
-# Get new logger
-logging.basicConfig()
+def get_log(name: str): 
+  # Get new logger
+  logging.basicConfig()
 
-logger = logging.getLogger('easylogs')
+  logger = logging.getLogger(name)
+  
+  # Configure logger to send logs to EasyLogs
+  easy_logs_host = "http://localhost:8080"
+  easy_logs_path = "/loggers/python/http-handler"
+  easy_logs_token = "LIh982y87GgljahsadfklJHLIUG87g1u1e7f6eb2ee145571858e8e24"
+  
+  # Create HTTP handler
+  http_handler = logging.handlers.HTTPHandler(
+      easy_logs_host,
+      f'{easy_logs_path}?key={easy_logs_token}',
+      method='POST',
+  )
+  logger.addHandler(http_handler)
+  
+  return logger
+  
+
+logger = get_log("easylogs")
 logger.setLevel(logging.DEBUG)
-
-# Configure logger to send logs to EasyLogs
-easy_logs_host = "http://localhost:8080"
-easy_logs_path = "/loggers/python/http-handler"
-easy_logs_token = "LIh982y87GgljahsadfklJHLIUG87g1u1e7f6eb2ee145571858e8e24"
-
-# Create HTTP handler
-http_handler = logging.handlers.HTTPHandler(
-    easy_logs_host,
-    f'{easy_logs_path}?key={easy_logs_token}',
-    method='POST',
-)
-logger.addHandler(http_handler)
 
 # Send logs
 logger.info('This is a test log message')
@@ -191,6 +198,67 @@ try:
 except Exception as e:
     logger.error('Error', exc_info=e, extra={'foo': 'bar'}, stack_info=True)
     logger.exception("asdf", e)
+```
+
+> WARNING: The default handler doesn't manager connections errors. Bot a better resilient HTTP handler see next point.
+
+### Python HTTP Handler (fault-tolerant version)
+
+This is a fault-tolerant HTTP handler for send logs. If server doesn't responds, keep the logs and try again later.
+
+```python
+import queue
+import logging
+import logging.handlers
+
+#
+# This is the HTTP Handler for a resilient log client
+#
+class HTTPHandlerResilient(logging.handlers.HTTPHandler):
+    def __init__(self, host, url, method='GET', secure=True):
+        super().__init__(host, url, method, secure)
+        self._queue = queue.Queue()
+
+    def emit(self, record):
+        try:
+            super().emit(record)
+
+            # If not error, try to send any remaining messages
+            while True:
+                try:
+                    super().emit(self._queue.get_nowait())
+                except queue.Empty:
+                    break
+
+        except ConnectionError:
+            self._queue.put(record)
+
+    def handleError(self, record):
+        raise ConnectionError()
+
+
+def get_log(name: str): 
+  # Get new logger
+  logging.basicConfig()
+
+  logger = logging.getLogger(name)
+  
+  # Configure logger to send logs to EasyLogs
+  easy_logs_host = "http://localhost:8080"
+  easy_logs_path = "/loggers/python/http-handler"
+  easy_logs_token = "LIh982y87GgljahsadfklJHLIUG87g1u1e7f6eb2ee145571858e8e24"
+  
+  #
+  # CHANGE THIS: logging.handlers.HTTPHandler -> HTTPHandlerResilient
+  #    
+  http_handler = HTTPHandlerResilient(
+      easy_logs_host,
+      f'{easy_logs_path}?key={easy_logs_token}',
+      method='POST',
+  )
+  logger.addHandler(http_handler)
+  
+  return logger
 ```
 
 ## Java (NOT IMPLEMENTED)
