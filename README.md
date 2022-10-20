@@ -162,6 +162,8 @@ Python has a builtin [HTTP Handler log](https://docs.python.org/3/library/loggin
 This file configures a logger and sent the log to a remote HTTP server.
 """
 
+from urllib.parse import urlparse
+
 import logging
 import logging.handlers
 
@@ -176,11 +178,14 @@ def get_log(name: str):
   easy_logs_path = "/loggers/python/http-handler"
   easy_logs_token = "LIh982y87GgljahsadfklJHLIUG87g1u1e7f6eb2ee145571858e8e24"
   
+  parsed_url = urlparse(easy_logs_host)
+  
   # Create HTTP handler
   http_handler = logging.handlers.HTTPHandler(
-      easy_logs_host,
-      f'{easy_logs_path}?key={easy_logs_token}',
-      method='POST',
+    parsed_url.netloc,
+    f'{easy_logs_path}?key={easy_logs_token}',
+    method='POST',
+    secure=True if parsed_url.scheme == "https" else False
   )
   logger.addHandler(http_handler)
   
@@ -207,6 +212,8 @@ except Exception as e:
 This is a fault-tolerant HTTP handler for send logs. If server doesn't responds, keep the logs and try again later.
 
 ```python
+from urllib.parse import urlparse
+
 import queue
 import logging
 import logging.handlers
@@ -248,13 +255,16 @@ def get_log(name: str):
   easy_logs_path = "/loggers/python/http-handler"
   easy_logs_token = "LIh982y87GgljahsadfklJHLIUG87g1u1e7f6eb2ee145571858e8e24"
   
+  parsed_url = urlparse(easy_logs_host)
+  
   #
   # CHANGE THIS: logging.handlers.HTTPHandler -> HTTPHandlerResilient
   #    
   http_handler = HTTPHandlerResilient(
-      easy_logs_host,
-      f'{easy_logs_path}?key={easy_logs_token}',
-      method='POST',
+    parsed_url.netloc,
+    f'{easy_logs_path}?key={easy_logs_token}',
+    method='POST',
+    secure=True if parsed_url.scheme == "https" else False
   )
   logger.addHandler(http_handler)
   
