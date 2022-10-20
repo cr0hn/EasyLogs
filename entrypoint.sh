@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-EMBEDED_DB=${EMBEDED_DB:-false}
+EMBEDED_DB=${EMBEDED_DB:-}
 
 if [ -n "$EMBEDED_DB" ]; then
     echo "[*] Starting embedded MongoDB database"
