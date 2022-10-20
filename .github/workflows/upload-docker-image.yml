@@ -9,6 +9,9 @@ on:
       - easy_logs/**
       - VERSION
       - Dockerfile
+      - entrypoint.sh
+      - requirements.txt
+      - requirements-deployment.txt
 
 jobs:
 
