@@ -22,6 +22,8 @@ RUN curl https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian11-6.0.2.tg
 COPY ./entrypoint.sh ./usr/local/bin/entrypoint
 RUN chmod +x /usr/local/bin/entrypoint
 
+COPY ./deployment/gunicorn.conf.py /gunicorn.conf.py
+
 COPY ./easy_logs ./easy_logs
 RUN chown -R easylogs:easylogs /easy_logs
 
