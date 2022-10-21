@@ -5,6 +5,10 @@ $(function() {
         searchForm.submit();
     });
 
+    $("#logger_name").change(function() {
+        searchForm.submit();
+    });
+
     $("#search_text").keyup(function(event) {
         // When press enter key
         if (event.keyCode === 13) {

@@ -19,10 +19,11 @@ def home():
     form = SearchForm(request.args, meta={'csrf': False})
 
     if form.validate():
-
         total, logs = get_python_handler_logs(
             filter_log_level=form.log_level.data,
             filter_search_text=form.search_text.data,
+            filter_logger_name=form.logger_name.data,
+            filter_date_order=form.date_order.data,
             page=form.page.data,
             max_per_page=MAX_PER_PAGE
         )

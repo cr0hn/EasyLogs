@@ -2,6 +2,8 @@ import re
 
 from flask import Flask
 
+from .models import MAX_TOTAL_LOGS
+
 REGEX_PAGE = re.compile(r"page=\d+")
 
 def setup_jinja_dashboard(_app: Flask):
@@ -31,5 +33,25 @@ def setup_jinja_dashboard(_app: Flask):
                 return f"{url}&page={page}"
             else:
                 return REGEX_PAGE.sub(f"page={page}", url)
+    def change_url_order(url: str):
+        if "date_order=desc" in url:
+            new_order = "asc"
+            current_order = "desc"
+        else:
+            new_order = "desc"
+            current_order = "asc"
+
+        if "date_order=" in url:
+            return url.replace(f"date_order={current_order}", f"date_order={new_order}")
+
+        else:
+            # Ad or replace page in url
+            if "?" not in url:
+                return f"{url}?date_order={new_order}"
+
+            else:
+                return f"{url}&date_order={new_order}"
 
     _app.jinja_env.globals.update(add_page=add_page)
+    _app.jinja_env.globals.update(change_url_order=change_url_order)
+    _app.jinja_env.globals.update(MAX_TOTAL_LOGS=MAX_TOTAL_LOGS)

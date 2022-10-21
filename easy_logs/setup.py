@@ -33,11 +33,14 @@ def setup_errors(_app: Flask):
         return render_template("errors/40x.html"), 404
 
 def setup_sessions(_app: Flask):
-    import redis
 
-    _app.config["SESSION_REDIS"] = redis.Redis.from_url(_app.config["REDIS_URI"])
+    # If we're in development mode, we don't want to use redis
+    if not _app.debug:
+        import redis
 
-    Session(_app)
+        _app.config["SESSION_REDIS"] = redis.Redis.from_url(_app.config["REDIS_URI"])
+
+        Session(_app)
 
 def setup_app() -> Flask:
 

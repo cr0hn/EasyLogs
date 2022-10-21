@@ -104,6 +104,14 @@ a {
     color: #5a5c69;
 }
 
+.color-white a, .color-white a:hover {
+    color: #5a5c69;
+}
+
 .bg-easylogs-primary {
     background-color: #aae9c3 !important;
+}
+
+.p-08 {
+    padding: 0.7rem;
 }
