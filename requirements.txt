@@ -4,6 +4,7 @@ flask-wtf
 Flask-login
 Flask-Session
 Flask-Pydantic
+Flask-paginate
 
 redis
 pymongo[srv]~=4.2.0

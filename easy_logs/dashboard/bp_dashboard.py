@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request
+from flask_paginate import Pagination
 from flask_login import login_required
+from flask import Blueprint, render_template, request
 
 from .forms import SearchForm
 from .models import get_python_handler_logs
@@ -40,26 +41,15 @@ def home():
     if total_pages == 0:
         total_pages = 1
 
-    # Calculate previous page
-    previous_page = form.page.data - 1
-    if previous_page < 1:
-        previous_page = 1
+    pagination = Pagination(page=form.page.data, total=total, per_page=MAX_PER_PAGE)
 
-    # Calculate next page
-    next_page = form.page.data + 1
-    if next_page > total_pages:
-        next_page = total_pages
 
     return render_template(
         "dashboard/home.html",
+        pagination=pagination,
         form=form,
-        logs_page_step=3,
-        logs_current_page=form.page.data,
-        logs_previous_page=previous_page,
-        logs_next_page=next_page,
         logs_total_pages=total_pages,
         logs_per_page=MAX_PER_PAGE,
-        total_logs=total,
         logs=logs,
         log_source="python-http-handler"
     )

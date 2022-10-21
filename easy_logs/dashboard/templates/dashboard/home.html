@@ -69,41 +69,21 @@
                     <div class="col-sm-12 col-md-12">
                         <div class="dataTables_info ml-4 mt-2 text-center" id="dataTable_info" role="status" aria-live="polite">Showing 1 to
                             {{ logs_per_page }} of {{ logs_total_pages }} pages.
-                            <span class="d-block"><small>Only displays first {{ MAX_TOTAL_LOGS }} entries</small></span>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-sm-12 col-md-12">
-                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                            <ul class="pagination justify-content-center">
-                                <li class="paginate_button page-item previous {% if logs_current_page == logs_previous_page %}disabled{% endif %}" id="dataTable_previous">
-                                    <a href="{{ add_page(url_for(request.endpoint, **request.args), logs_previous_page) }}" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><i class="fa fa-chevron-left"></i> Previous</a>
-                                </li>
-                                {% for page in range(1, logs_total_pages + 1) %}
-                                    <li class="paginate_button page-item {% if logs_current_page == page %}active{% endif %}">
-                                        <a href="{{ add_page(url_for(request.endpoint, **request.args), page) }}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">{{ page }}</a>
-                                    </li>
-                                    {#                            {% if page < (logs_page_step + 1) or page > logs_total_pages - logs_page_step %}#}
-                                    {#                                <li class="paginate_button page-item {% if logs_current_page == page %}active{% endif %}">#}
-                                    {#                                    <a href="{{ url_for('bp_dashboard.home', page=page) }}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">{{ page }}</a>#}
-                                    {#                                </li>#}
-                                    {#                            {% else %}#}
-                                    {#                                {% if page == logs_page_step + 1 %}#}
-                                    {#                                    <li class="paginate_button page-item">#}
-                                    {#                                        <span class="page-link disabled">...</span>#}
-                                    {#                                    </li>#}
-                                    {#                                {% endif %}#}
-                                    {#                            {% endif %}#}
-                                {% endfor %}
-                                <li class="paginate_button page-item next {% if logs_current_page == logs_next_page %}disabled{% endif %}" id="dataTable_next">
-                                    <a href="{{ add_page(url_for(request.endpoint, **request.args), logs_next_page) }}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next <i class="fa fa-chevron-right"></i></a>
-                                </li>
-                            </ul>
+                        <div class="d-flex">
+                            <div class="mx-auto justify-content-center">
+                                {{ pagination.links }}
+                            </div>
                         </div>
                     </div>
                 </div>
             {% endif %}
+
+
         </div>
     </form>
     <!-- /.container-fluid -->
