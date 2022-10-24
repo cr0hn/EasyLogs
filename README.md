@@ -98,8 +98,6 @@ But most of them are very complex to configure and use. EasyLogs is a simple das
 
 <img src="https://raw.githubusercontent.com/cr0hn/easylogs/main/images/mobile-video.gif" width="300px" />
 
-![PWA](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/mobile-video.gif)
-
 # Deployment
 
 EasyLogs is composed by:
