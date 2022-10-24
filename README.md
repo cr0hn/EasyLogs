@@ -92,11 +92,11 @@ But most of them are very complex to configure and use. EasyLogs is a simple das
 
 ## Mobile
 
-![Screenshot 4](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-004.png)
-
-![Screenshot 5](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-005.png)
+<img src="https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-004.png" width="300px" /> &nbsp;&nbsp; <img src="https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-005.png" width="300px" />
 
 ## Installing EasyLogs as a PWA
+
+<img src="https://raw.githubusercontent.com/cr0hn/easylogs/main/images/mobile-video.gif" width="300px" />
 
 ![PWA](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/mobile-video.gif)
 
