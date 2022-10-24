@@ -351,13 +351,14 @@ If you also know Python and want to add a new end-point to the API, please, foll
 
 # TODO
 
-- [ ] Improve pagination for long logs
+- [X] Improve pagination for long logs
 - [ ] Add generic endpoint to push logs.
-- [ ] Add more text
+- [ ] Add tests
 - [ ] Add more languages
 - [ ] Improve authentication system: add API key support, multi-user...
 - [ ] Add download logs button
-- [ ] Add filter by date
+- [X] Add filter by date
+- [X] Real-time receive los support
 
 # License
 
