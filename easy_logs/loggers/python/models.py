@@ -9,11 +9,19 @@ from pymongo import IndexModel
 from easy_logs.db import current_mongo
 
 COLLECTION_PYTHON_HTTP_HANDLER = "python-http-handler"
+COLLECTION_PYTHON_LUMBERJACK_HANDLER = "python-lumberjack-handler"
 
 
 def _insert_log_(d: dict, collection: str):
     current_mongo[collection].insert_one(d)
 
+def insert_python_lumberjack_handler(
+        d: dict
+):
+    d["levelno"] = 0
+    d["created"] = datetime.datetime.now()
+
+    _insert_log_(d, COLLECTION_PYTHON_LUMBERJACK_HANDLER)
 
 def insert_python_http_handler(
         d: dict
