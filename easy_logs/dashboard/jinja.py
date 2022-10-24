@@ -1,5 +1,7 @@
 import re
 
+import orjson
+
 from flask import Flask
 
 from .models import MAX_TOTAL_LOGS
@@ -51,6 +53,18 @@ def setup_jinja_dashboard(_app: Flask):
 
             else:
                 return f"{url}&date_order={new_order}"
+
+    @_app.template_filter("pretty_print_json")
+    def pretty_print_json(value):
+        if type(value) is str:
+            v = orjson.loads(value)
+        else:
+            v = value
+
+        if "_id" in v:
+            del v["_id"]
+
+        return orjson.dumps(v, option=orjson.OPT_INDENT_2).decode()
 
     _app.jinja_env.globals.update(add_page=add_page)
     _app.jinja_env.globals.update(change_url_order=change_url_order)

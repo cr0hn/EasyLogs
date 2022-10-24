@@ -115,3 +115,11 @@ a {
 .p-08 {
     padding: 0.7rem;
 }
+
+.caret-line {
+    line-height: 1.2;
+}
+
+.row-payload {
+    background-color: #f6f6f6;
+}

@@ -1,10 +1,13 @@
 # Web
-Flask~=2.2.2
+Flask
 flask-wtf
+flask-sse
 Flask-login
 Flask-Session
 Flask-Pydantic
 Flask-paginate
+
+orjson
 
 redis
 pymongo[srv]~=4.2.0

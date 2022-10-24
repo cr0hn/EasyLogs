@@ -29,6 +29,8 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v3
+        run: |
+          export VERSION=$(cat VERSION)
         with:
             push: true
-            tags: ${{ secrets.docker_username }}/easylogs:${{ github.sha }},${{ secrets.docker_username }}/easylogs:latest
+            tags: ${{ secrets.docker_username }}/easylogs:$VERSION,${{ secrets.docker_username }}/easylogs:latest

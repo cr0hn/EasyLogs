@@ -6,6 +6,13 @@
     <ul class="navbar-nav ml-auto">
         <!-- Nav Item - User Information -->
         <li class="nav-item">
+            <span class="mr-2 text-gray-600 small nav-link">
+                <b class="mr-2">Realtime</b>
+                <button id="playBtn" class="btn-sm btn-success mr-1" style="line-height: 1;"><i class="fa fa-play"></i></button>
+                <button id="stopBtn" class="btn-sm" disabled style="line-height: 1;"><i class="fa fa-stop"></i></button>
+            </span>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ url_for('bp_auth.logout') }}">
                 <span class="mr-2 text-gray-600 small">Log out&nbsp; <i class="fas fa-sign-out-alt"></i></span>
             </a>

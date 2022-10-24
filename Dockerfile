@@ -7,10 +7,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY requirements.txt .
+COPY requirements.freeze.txt .
 COPY requirements-deployment.txt .
 
-RUN pip install --disable-pip-version-check --no-cache-dir -r /requirements.txt -r /requirements-deployment.txt
+RUN pip install --disable-pip-version-check --no-cache-dir -r /requirements.freeze.txt -r /requirements-deployment.txt
 
 # Install MongoDB for standalone mode
 RUN curl https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian11-6.0.2.tgz -o mongo.tgz && \

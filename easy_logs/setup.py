@@ -1,5 +1,7 @@
+import redis
 import flask_pydantic
 
+from flask_sse import sse
 from flask_session import Session
 from flask import Flask, render_template
 
@@ -35,18 +37,20 @@ def setup_errors(_app: Flask):
 def setup_sessions(_app: Flask):
 
     # If we're in development mode, we don't want to use redis
-    if not _app.debug:
-        import redis
+    _app.config["SESSION_REDIS"] = redis.Redis.from_url(_app.config["REDIS_URI"])
 
-        _app.config["SESSION_REDIS"] = redis.Redis.from_url(_app.config["REDIS_URI"])
+    Session(_app)
 
-        Session(_app)
+def setup_sse(_app: Flask):
+    _app.config["REDIS_URL"] = _app.config["REDIS_URI"]
+    _app.register_blueprint(sse, url_prefix='/stream')
 
 def setup_app() -> Flask:
 
     app = Flask(__name__)
     app.config.from_object("easy_logs.settings.EasyLogsConfig")
 
+    setup_sse(app)
     setup_errors(app)
     setup_sessions(app)
     setup_global_cli(app)

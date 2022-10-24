@@ -1,6 +1,14 @@
-{% macro python_http_handler(data) %}
-    <div class="col-lg-1 col-3 text-xsm text-center font-weight-bold {{ data['levelname'] | log_level_color }} text-uppercase border-right-log" style="border-right: 1px solid #0d5aa7">{{ data['levelname'] }}</div>
-    <div class="col-lg-2 col-3 text-xsm text-center border-right-log">{{ data['name'] }}</div>
-    <div class="col-lg-2 col-3 text-xsm text-center border-right-log">{{ data['created'] }}</div>
-    <div class="col-lg-7 col-3 text-xsm">{{ data['msg'] }}</div>
+{% macro python_http_handler_table(data) %}
+    <div class="col-lg-1 col-3 text-xsm text-center font-weight-bold {{ data['levelname'] | log_level_color }} text-uppercase border-right-log align-middle" style="border-right: 1px solid #0d5aa7">{{ data['levelname'] }}</div>
+    <div class="col-lg-2 col-3 text-xsm text-center border-right-log align-middle">{{ data['name'] }}</div>
+    <div class="col-lg-3 col-3 text-xsm text-center border-right-log align-middle">{{ data['created'] }}</div>
+    <div class="col-lg-6 col-3 text-xsm align-middle">{{ data['msg'] }}</div>
+{% endmacro %}
+
+{% macro python_http_handler_payload(data) %}
+<pre class="p-0 m-0">
+    <code class="language-json m-0 p-0 pr-2">
+{{ data | pretty_print_json }}</code>
+</pre>
+
 {% endmacro %}

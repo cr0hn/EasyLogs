@@ -9,7 +9,7 @@ services:
       - redis-data:/data
 
   mongo:
-    image: mongo:6
+    image: mongo:5
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root

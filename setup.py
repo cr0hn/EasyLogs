@@ -1,6 +1,6 @@
 from setuptools import setup
 
-with open("requirements.txt", "r") as f:
+with open("requirements.freeze.txt", "r") as f:
     requirements = f.read().splitlines()
 
 setup(

@@ -1,5 +1,5 @@
 {% extends "_master_center_content.html" %}
-{% from "dashboard/macros/python_http_handler.html" import python_http_handler %}
+{% from "dashboard/macros/python_http_handler.html" import python_http_handler_table, python_http_handler_payload %}
 
 {% block center_content %}
     <!-- Begin Page Content -->
@@ -11,13 +11,13 @@
 
                     <div class="row">
                         <div class="col-12 col-sm-3">
-                            {{ form.log_level(class="form-control form-select") }}
+                            {{ form.log_level(class="form-control form-select mb-2 pb-sm-2") }}
                         </div>
                         <div class="col-12 col-sm-3">
-                            {{ form.logger_name(class="form-control") }}
+                            {{ form.logger_name(class="form-control mb-sm-2 mb-2 pb-sm-2") }}
                         </div>
                         <div class="col-12 col-sm-6">
-                            {{ form.search_text(class="form-control") }}
+                            {{ form.search_text(class="form-control mb-sm-2 mb-2 pb-sm-2") }}
                         </div>
                     </div>
 
@@ -34,12 +34,11 @@
             <!-- Content Row -->
             <div class="row mb-1 card shadow-white mb-2" style="background: #a8e9c2;">
                 <div class="col-sm-12 m-2">
-                    {#                    <div class="float-right"><a class="btn btn-sm btn-success btn-">asdf</a></div>#}
                     <div class="row bb-1">
                         <div class="col-lg-1 col-3 text-xsm text-center font-weight-bold text-uppercase border-right-log color-white">Log <p class="d-none d-sm-inline">Level</p></div>
                         <div class="col-lg-2 col-3 text-xsm text-center font-weight-bold border-right-log color-white">LOGGER <span class="d-none d-sm-inline">NAME</span></div>
-                        <div class="col-lg-2 col-3 text-xsm text-center font-weight-bold border-right-log color-white"><a class="color-white" href="{{ change_url_order(url_for(request.endpoint, **request.args)) }}">CREATED <i class="fas fa-caret-{% if form.date_order.data == "desc" %}down{% else %}up{% endif %}"></i></a></div>
-                        <div class="col-lg-7 col-3 text-xsm font-weight-bold color-white"><span class="d-none d-sm-inline">LOG </span>MESSAGE</div>
+                        <div class="col-lg-3 col-3 text-xsm text-center font-weight-bold border-right-log color-white"><a class="color-white" href="{{ change_url_order(url_for(request.endpoint, **request.args)) }}">CREATED <i class="fas fa-caret-{% if form.date_order.data == "desc" %}down{% else %}up{% endif %}"></i></a></div>
+                        <div class="col-lg-6 col-3 text-xsm font-weight-bold color-white"><span class="d-none d-sm-inline">LOG </span>MESSAGE</div>
                     </div>
                 </div>
             </div>
@@ -52,17 +51,27 @@
                     </div>
                 </div>
             {% endif %}
+            <div id="LogsTable">
             {% for log in logs %}
-                <div class="row mb-1 card shadow">
+                <div style="z-index: 0;" id="logsTable{{ loop.index }}" onclick="changeIcon('#logsTable{{ loop.index }}');" class="row mb-1 card shadow" data-toggle="collapse" data-target="#logDetails{{ loop.index }}" aria-expanded="false" aria-controls="collapseExample">
                     <div class="col-sm-12 m-2">
+                        <i class="float-left fas fa-caret-right"></i>
                         <div class="row bb-1">
                             {% if log_source == "python-http-handler" %}
-                                {{ python_http_handler(log) }}
+                                {{ python_http_handler_table(log) }}
                             {% endif %}
                         </div>
                     </div>
                 </div>
+                <div style="z-index: 20;" class="row collapse" id="logDetails{{ loop.index }}">
+                    <div class="card card-body mb-2 row-payload">
+                        {% if log_source == "python-http-handler" %}
+                            {{ python_http_handler_payload(log) }}
+                        {% endif %}
+                    </div>
+                </div>
             {% endfor %}
+            </div>
 
             {% if logs | length != 0 %}
                 <div class="row mt-2">
@@ -87,4 +96,85 @@
         </div>
     </form>
     <!-- /.container-fluid -->
+{% endblock %}
+{% block javascript %}
+    <script>
+        /*
+         *   Change the icon of the log table
+         */
+        function changeIcon(elementId) {
+            const element = $(`${elementId} i`);
+
+            if (element.hasClass("fa-caret-right")) {
+                element.removeClass("fa-caret-right");
+                element.addClass("fa-caret-down");
+            } else {
+                element.removeClass("fa-caret-down");
+                element.addClass("fa-caret-right");
+            }
+        }
+
+        const LogsTable = $("#LogsTable");
+        const LogSource = "{{ log_source }}";
+        const maxLogPerPage = {{ logs_per_page }};
+
+        const source = new EventSource("{{ url_for('sse.stream') }}");
+
+        function processLogEvent (event) {
+
+                if (LogSource === "python-http-handler") {
+                    jsonData = JSON.parse(event.data);
+
+                    newPythonHTTPLoggerEntry(jsonData, LogsTable, maxLogPerPage);
+                }
+
+            }
+
+        // Receive a message from the server via SSE
+        function startRealtime() {
+            source.addEventListener('new_log_entry', processLogEvent, false);
+        }
+
+        function stopRealtime() {
+            source.removeEventListener('new_log_entry', processLogEvent, false);
+        }
+
+        // Start / Stop realtime
+        const playBtn = $("#playBtn");
+        const stopBtn = $("#stopBtn");
+
+        function toggleButtonsStartStop() {
+
+            if (stopBtn.prop("disabled")) {
+                stopBtn.prop("disabled", false);
+                playBtn.prop("disabled", true);
+
+
+                playBtn.removeClass("btn-success")
+                stopBtn.addClass("btn-danger")
+            } else {
+                stopBtn.prop("disabled", true);
+                playBtn.prop("disabled", false);
+
+                stopBtn.removeClass("btn-danger")
+                playBtn.addClass("btn-success")
+            }
+        }
+
+        playBtn.click(function (event) {
+            event.preventDefault();
+            startRealtime();
+
+            toggleButtonsStartStop();
+        });
+
+        stopBtn.click(function (event) {
+            event.preventDefault();
+
+            stopRealtime();
+
+            toggleButtonsStartStop();
+        });
+
+    </script>
 {% endblock %}

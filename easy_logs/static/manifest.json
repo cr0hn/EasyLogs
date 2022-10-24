@@ -1,0 +1,28 @@
+{
+  "name": "EasyLogs",
+  "short_name": "EasyLogs",
+  "description": "The simple, agnostic and lightweight logging dashboard",
+  "theme_color": "transparent",
+  "background_color": "transparent",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "img/favicons/favicon-16x16.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "img/favicons/favicon-32x32.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+
+      "src": "img/favicons/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ]
+}
