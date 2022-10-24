@@ -11,9 +11,13 @@ In a nutshell ``EasyLogs`` is a simple, but powerful, dashboard to visualize log
 - [EasyLogs - The simple, agnostic and lightweight logging dashboard](#easylogs---the-simple-agnostic-and-lightweight-logging-dashboard)
 
 - [What is EasyLogs?](#what-is-easylogs)
+  - [Main features](#main-features)
   - [Why not...](#why-not)
   - [EasyLogs is for you if...](#easylogs-is-for-you-if)
 - [Some screenshots](#some-screenshots)
+  - [Desktop](#desktop)
+  - [Mobile](#mobile)
+  - [Installing EasyLogs as a PWA](#installing-easylogs-as-a-pwa)
 - [Deployment](#deployment)
   - [Configuration](#configuration)
   - [Docker (standalone)](#docker-standalone)
@@ -44,6 +48,16 @@ EasyLogs is a agnostic dashboard for display and filter logs. It can be used wit
 
 The main idea is to provide a simple and lightweight dashboard to visualize logs that you can use quickly.
 
+## Main features
+
+- Real-time logs.
+- Simple dashboard interface.
+- Filter logs by level, date, message, etc.
+- Text search in logs messages.
+- Log aggregation.
+- Mobile-first design.
+- [PWA](https://en.wikipedia.org/wiki/Progressive_web_app) support (See images below).
+
 ## Why not...
 
 There are a lot of log dashboards out there:
@@ -68,12 +82,23 @@ But most of them are very complex to configure and use. EasyLogs is a simple das
 
 # Some screenshots
 
+## Desktop
+
 ![Screenshot 1](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-001.png)
 
 ![Screenshot 2](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-002.png)
 
 ![Screenshot 3](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-003.png)
 
+## Mobile
+
+![Screenshot 4](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-004.png)
+
+![Screenshot 5](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/screenshot-005.png)
+
+## Installing EasyLogs as a PWA
+
+![PWA](https://raw.githubusercontent.com/cr0hn/easylogs/main/images/mobile-video.gif)
 
 # Deployment
 
