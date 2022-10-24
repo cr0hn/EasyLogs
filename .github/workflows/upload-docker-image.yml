@@ -31,4 +31,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
             push: true
-            tags: ${{ secrets.docker_username }}/easylogs:$(cat VERSION),${{ secrets.docker_username }}/easylogs:latest
+            tags: ${{ secrets.docker_username }}/easylogs:${{ github.sha }},${{ secrets.docker_username }}/easylogs:latest
