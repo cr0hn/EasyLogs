@@ -21,4 +21,4 @@ export FLASK_APP=easy_logs.app
 flask create-mongo-indexes
 
 echo "[*] Starting EasyLogs"
-exec gunicorn --bind :8080 -w 10 -c gunicorn.conf.py --worker-class gevent --timeout 0 --backlog 1024 --worker-connections 512 easy_logs.app:app
+exec gunicorn --bind :8080 -w 1 -c gunicorn.conf.py --worker-class gevent --timeout 0 --backlog 1024 --worker-connections 2048 easy_logs.app:app
