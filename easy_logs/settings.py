@@ -20,6 +20,7 @@ class EasyLogsConfig(EnvConfig):
     FLASK_PYDANTIC_VALIDATION_ERROR_RAISE: bool = True
 
     SESSION_TYPE: str = "redis"
+    SESSION_KEY_PREFIX: str = "easylogs:session:"
     SESSION_COOKIE_NAME: str = "easylogs_session"
     REDIS_URI: str = "redis://127.0.0.1:6379/0"
 
