@@ -2,6 +2,7 @@
 Flask
 flask-wtf
 flask-sse
+flask-cors
 Flask-login
 Flask-Session
 Flask-Pydantic

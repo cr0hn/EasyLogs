@@ -1,5 +1,3 @@
-from urllib.parse import urlparse, urljoin
-
 from flask import Blueprint, render_template, request, flash, url_for, redirect, current_app, abort
 from flask_login import logout_user, login_user, login_required
 

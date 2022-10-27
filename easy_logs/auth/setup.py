@@ -16,6 +16,9 @@ def setup_login(_app: Flask):
     def load_user(user_id):
         return User(name=user_id)
 
+    @login_manager.request_loader
+    def load_user_from_request(request):
+        return None
 
 def setup_auth(_app: Flask, api_prefix :str = None):
     setup_login(_app)

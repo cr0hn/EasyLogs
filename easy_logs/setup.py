@@ -2,6 +2,7 @@ import redis
 import flask_pydantic
 
 from flask_sse import sse
+from flask_cors import CORS
 from flask_session import Session
 from flask import Flask, render_template
 
@@ -45,12 +46,16 @@ def setup_sse(_app: Flask):
     _app.config["REDIS_URL"] = _app.config["REDIS_URI"]
     _app.register_blueprint(sse, url_prefix='/stream')
 
+def setup_cors(_app: Flask):
+    CORS(_app, resources={r"/*": {"origins": "*"}})
+
 def setup_app() -> Flask:
 
     app = Flask(__name__)
     app.config.from_object("easy_logs.settings.EasyLogsConfig")
 
     setup_sse(app)
+    setup_cors(app)
     setup_errors(app)
     setup_sessions(app)
     setup_global_cli(app)
