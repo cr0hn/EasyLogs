@@ -10,7 +10,7 @@ on:
       - VERSION
       - Dockerfile
       - entrypoint.sh
-      - requirements.txt
+      - requirements.freeze.txt
       - requirements-deployment.txt
 
 jobs:
