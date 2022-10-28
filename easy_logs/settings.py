@@ -6,7 +6,7 @@ from sanic_envconfig import EnvConfig
 
 class EasyLogsConfig(EnvConfig):
     DEBUG: bool = True
-    SERVER_NAME: str = "localhost:5000"
+    # SERVER_NAME: str = "localhost:5000"
 
     SECRET_KEY: str = "aslñkjoaihs9y198y8o7Guyasbhucbzhuasdf_Z:mañpsdjoi1"
 
